@@ -6,6 +6,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
 public class DataDAO {
+
+    //register new user
     public static int register(String user_name, String password) {
         int status=-1;
         try {
@@ -22,6 +24,7 @@ public class DataDAO {
         return status;
     }
 
+    //login existing user
     public static int login(String user_name, String password) {
         int user_id=-1;
 
@@ -41,6 +44,8 @@ public class DataDAO {
         }
         return user_id;
     }
+
+    //display all books available (book id and book name)
     public static void displayBooks() {
         try {
             Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/magicofbooks", "bala-11786", "password");
@@ -55,6 +60,7 @@ public class DataDAO {
         }
     }
 
+    // display details of selected book
     public static void getBookDetails(int book_id) {
         try {
             Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/magicofbooks", "bala-11786", "password");
@@ -70,6 +76,7 @@ public class DataDAO {
         }
     }
 
+    //add, delete and display operation for new, favourite and compeleted books
     public static void bookOperations(int user_id, int book_id, int option, String type){
         try {
             Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/magicofbooks", "bala-11786", "password");
@@ -110,6 +117,7 @@ public class DataDAO {
         }
     }
 
+    //add or update book as admin
     public static void addUpdateBook(int book_id, String book_name, String author_name, String desc, String genre, int price) {
         try {
             Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/magicofbooks", "bala-11786", "password");
@@ -133,6 +141,7 @@ public class DataDAO {
         }
     }
 
+    //delete book as admin
     public static void deleteBook(int book_id) {
         try {
             Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/magicofbooks", "bala-11786", "password");
@@ -159,6 +168,7 @@ public class DataDAO {
         }
     }
 
+    //order book by low to high or high to low in price or by copies sold
     public static void displayBooksOrder(int option) {
         try {
             Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/magicofbooks", "bala-11786", "password");
@@ -167,7 +177,7 @@ public class DataDAO {
                 stmt = con.prepareStatement("select * from books order by price desc");
             }
             else if(option==1){
-                stmt = con.prepareStatement("select * from books order by number_of_copies_sold asc");
+                stmt = con.prepareStatement("select * from books order by number_of_copies_sold desc");
             }
             else {
                 stmt = con.prepareStatement("select * from books order by price asc");
@@ -183,6 +193,7 @@ public class DataDAO {
         }
     }
 
+    //updated sold count of book once user adds it as new book
     public static void updateCopiesSold(int book_id){
         try {
             Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/magicofbooks", "bala-11786", "password");

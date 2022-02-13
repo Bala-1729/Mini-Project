@@ -16,6 +16,7 @@ public class User implements Runnable{
         User.user_type =user_type;
     }
 
+    // add delete and display operation for new, favourite and completed books of user
     private static int bookOp(String type) throws Exception {
         long option = -1;
         System.out.println("0.Main menu\n1.Add book\n2.Delete book\n3.Display books");
@@ -47,6 +48,8 @@ public class User implements Runnable{
         return 1;
     }
 
+
+    //user application running as thread
     public static void userApplication(int user_id) throws Exception {
         System.out.println("Login successful as user.");
         long option = -1;
@@ -120,6 +123,7 @@ public class User implements Runnable{
         }
     }
 
+    //admin application running as thread
     public static void adminApplication() throws Exception {
         System.out.println("Login successful as admin.");
         long option = -1;
